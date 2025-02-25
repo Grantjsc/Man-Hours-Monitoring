@@ -103,7 +103,7 @@
 
         If departments.Count > 0 Then
             'Console.WriteLine("Departments with missing Time_In/Time_Out: " & vbCrLf & "- " & String.Join(vbCrLf & "- ", departments))
-            Send_Email()
+            'Send_Email()
         Else
             Console.WriteLine("No missing entries found for " & DateForEmail)
         End If
@@ -117,8 +117,4 @@
         MsgBox("Done getting the data of time in and time out for " & DateForEmail & "!")
     End Sub
 
-    Private Sub Guna2Button2_Click(sender As Object, e As EventArgs) Handles Guna2Button2.Click
-        UpdateManHours_Day()
-        UpdateManHours_Night()
-    End Sub
 End Class

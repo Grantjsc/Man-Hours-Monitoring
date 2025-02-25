@@ -26,13 +26,13 @@ Module DEV_Query
             Dev_ConOpen()
 
             ' Step 1: Retrieve data from DayShift_tb in MS Access
-            Dim selectQuery As String = "SELECT Employee_Code, [_Date], Time_In, Time_Out, ShiftType, Cost_Center, Manpower_Category, Department, ManHours, BasicHours, OT_Hours FROM DayShift_tb"
+            Dim selectQuery As String = "SELECT Employee_Code, [_Date], Time_In, Time_Out, ShiftType, Cost_Center, Manpower_Category, Department FROM DayShift_tb"
             Using accessCmd As New OleDbCommand(selectQuery, ACCDbconnection)
                 Using reader As OleDbDataReader = accessCmd.ExecuteReader()
                     If reader.HasRows Then
                         ' Step 2: Prepare SQL Server Insert Query
-                        Dim insertQuery As String = "INSERT INTO ProdMon_MasterList_tb (Employee_Code, [_Date], Time_In, Time_Out, ShiftType, Cost_Center, Manpower_Category, Department, ManHours, BasicHours, OT_Hours) " &
-                                                "VALUES (@EmployeeCode, @_Date, @TimeIn, @TimeOut, @ShiftType, @CostCenter, @ManpowerCategory, @Department, @ManH, @BasicH, @OtH)"
+                        Dim insertQuery As String = "INSERT INTO ProdMon_MasterList_tb (Employee_Code, [_Date], Time_In, Time_Out, ShiftType, Cost_Center, Manpower_Category, Department) " &
+                                                "VALUES (@EmployeeCode, @_Date, @TimeIn, @TimeOut, @ShiftType, @CostCenter, @ManpowerCategory, @Department)"
 
                         Using sqlCmd As New SqlCommand(insertQuery, Dev_Dbconnection)
                             ' Add parameters for SQL Server
@@ -45,9 +45,6 @@ Module DEV_Query
                             sqlCmd.Parameters.Add("@CostCenter", SqlDbType.VarChar)
                             sqlCmd.Parameters.Add("@ManpowerCategory", SqlDbType.VarChar)
                             sqlCmd.Parameters.Add("@Department", SqlDbType.VarChar)
-                            sqlCmd.Parameters.Add("@ManH", SqlDbType.Int)
-                            sqlCmd.Parameters.Add("@BasicH", SqlDbType.Int)
-                            sqlCmd.Parameters.Add("@OtH", SqlDbType.Int)
 
                             ' Step 3: Process Each Record
                             While reader.Read()
@@ -60,9 +57,6 @@ Module DEV_Query
                                 sqlCmd.Parameters("@CostCenter").Value = reader("Cost_Center")
                                 sqlCmd.Parameters("@ManpowerCategory").Value = reader("Manpower_Category")
                                 sqlCmd.Parameters("@Department").Value = reader("Department")
-                                sqlCmd.Parameters("@ManH").Value = reader("ManHours")
-                                sqlCmd.Parameters("@BasicH").Value = reader("BasicHours")
-                                sqlCmd.Parameters("@OtH").Value = reader("OT_Hours")
 
                                 ' Execute Insert for Each Row
                                 sqlCmd.ExecuteNonQuery()
@@ -92,13 +86,13 @@ Module DEV_Query
             Dev_ConOpen()
 
             ' Step 1: Retrieve data from DayShift_tb in MS Access
-            Dim selectQuery As String = "SELECT Employee_Code, [_Date], Time_In, Time_Out, ShiftType, Cost_Center, Manpower_Category, Department, ManHours, BasicHours, OT_Hours FROM NightShift_tb"
+            Dim selectQuery As String = "SELECT Employee_Code, [_Date], Time_In, Time_Out, ShiftType, Cost_Center, Manpower_Category, Department FROM NightShift_tb"
             Using accessCmd As New OleDbCommand(selectQuery, ACCDbconnection)
                 Using reader As OleDbDataReader = accessCmd.ExecuteReader()
                     If reader.HasRows Then
                         ' Step 2: Prepare SQL Server Insert Query
-                        Dim insertQuery As String = "INSERT INTO ProdMon_MasterList_tb (Employee_Code, [_Date], Time_In, Time_Out, ShiftType, Cost_Center, Manpower_Category, Department, ManHours, BasicHours, OT_Hours) " &
-                                                "VALUES (@EmployeeCode, @_Date, @TimeIn, @TimeOut, @ShiftType, @CostCenter, @ManpowerCategory, @Department, @ManH, @BasicH, @OtH)"
+                        Dim insertQuery As String = "INSERT INTO ProdMon_MasterList_tb (Employee_Code, [_Date], Time_In, Time_Out, ShiftType, Cost_Center, Manpower_Category, Department) " &
+                                                "VALUES (@EmployeeCode, @_Date, @TimeIn, @TimeOut, @ShiftType, @CostCenter, @ManpowerCategory, @Department)"
 
                         Using sqlCmd As New SqlCommand(insertQuery, Dev_Dbconnection)
                             ' Add parameters for SQL Server
@@ -111,9 +105,6 @@ Module DEV_Query
                             sqlCmd.Parameters.Add("@CostCenter", SqlDbType.VarChar)
                             sqlCmd.Parameters.Add("@ManpowerCategory", SqlDbType.VarChar)
                             sqlCmd.Parameters.Add("@Department", SqlDbType.VarChar)
-                            sqlCmd.Parameters.Add("@ManH", SqlDbType.Int)
-                            sqlCmd.Parameters.Add("@BasicH", SqlDbType.Int)
-                            sqlCmd.Parameters.Add("@OtH", SqlDbType.Int)
 
                             ' Step 3: Process Each Record
                             While reader.Read()
@@ -126,9 +117,6 @@ Module DEV_Query
                                 sqlCmd.Parameters("@CostCenter").Value = reader("Cost_Center")
                                 sqlCmd.Parameters("@ManpowerCategory").Value = reader("Manpower_Category")
                                 sqlCmd.Parameters("@Department").Value = reader("Department")
-                                sqlCmd.Parameters("@ManH").Value = reader("ManHours")
-                                sqlCmd.Parameters("@BasicH").Value = reader("BasicHours")
-                                sqlCmd.Parameters("@OtH").Value = reader("OT_Hours")
 
                                 ' Execute Insert for Each Row
                                 sqlCmd.ExecuteNonQuery()
@@ -201,9 +189,6 @@ Module DEV_Query
 
                 Night_Get_EmployeeDetails()
                 Update_Date_Night()
-
-                UpdateManHours_Day() ' Man Hours computation
-                UpdateManHours_Night() ' Man Hours computation
 
                 TransferDataToMasterList_Dayshift()
                 DeleteRecords_Day()
@@ -283,9 +268,6 @@ Module DEV_Query
 
                 Night_Get_EmployeeDetails()
                 Update_Date_Night()
-
-                UpdateManHours_Day() ' Man Hours computation
-                UpdateManHours_Night() ' Man Hours computation
 
                 TransferDataToMasterList_Dayshift()
                 DeleteRecords_Day()

@@ -26,17 +26,17 @@ Module DEV_Query
             Dev_ConOpen()
 
             ' Step 1: Retrieve data from DayShift_tb in MS Access
-            Dim selectQuery As String = "SELECT AccessCode, Employee_Code, [_Date], Time_In, Time_Out, ShiftType, Cost_Center, Manpower_Category, Department FROM DayShift_tb"
+            Dim selectQuery As String = "SELECT Employee_Code, [_Date], Time_In, Time_Out, ShiftType, Cost_Center, Manpower_Category, Department, ManHours, BasicHours, OT_Hours FROM DayShift_tb"
             Using accessCmd As New OleDbCommand(selectQuery, ACCDbconnection)
                 Using reader As OleDbDataReader = accessCmd.ExecuteReader()
                     If reader.HasRows Then
                         ' Step 2: Prepare SQL Server Insert Query
-                        Dim insertQuery As String = "INSERT INTO ProdMon_MasterList_tb (AccessCode, Employee_Code, [_Date], Time_In, Time_Out, ShiftType, Cost_Center, Manpower_Category, Department) " &
-                                                "VALUES (@AccessCode, @EmployeeCode, @_Date, @TimeIn, @TimeOut, @ShiftType, @CostCenter, @ManpowerCategory, @Department)"
+                        Dim insertQuery As String = "INSERT INTO ProdMon_MasterList_tb (Employee_Code, [_Date], Time_In, Time_Out, ShiftType, Cost_Center, Manpower_Category, Department, ManHours, BasicHours, OT_Hours) " &
+                                                "VALUES (@EmployeeCode, @_Date, @TimeIn, @TimeOut, @ShiftType, @CostCenter, @ManpowerCategory, @Department, @ManH, @BasicH, @OtH)"
 
                         Using sqlCmd As New SqlCommand(insertQuery, Dev_Dbconnection)
                             ' Add parameters for SQL Server
-                            sqlCmd.Parameters.Add("@AccessCode", SqlDbType.VarChar)
+                            'sqlCmd.Parameters.Add("@AccessCode", SqlDbType.VarChar)
                             sqlCmd.Parameters.Add("@EmployeeCode", SqlDbType.VarChar)
                             sqlCmd.Parameters.Add("@_Date", SqlDbType.Date)
                             sqlCmd.Parameters.Add("@TimeIn", SqlDbType.DateTime)
@@ -45,10 +45,13 @@ Module DEV_Query
                             sqlCmd.Parameters.Add("@CostCenter", SqlDbType.VarChar)
                             sqlCmd.Parameters.Add("@ManpowerCategory", SqlDbType.VarChar)
                             sqlCmd.Parameters.Add("@Department", SqlDbType.VarChar)
+                            sqlCmd.Parameters.Add("@ManH", SqlDbType.Int)
+                            sqlCmd.Parameters.Add("@BasicH", SqlDbType.Int)
+                            sqlCmd.Parameters.Add("@OtH", SqlDbType.Int)
 
                             ' Step 3: Process Each Record
                             While reader.Read()
-                                sqlCmd.Parameters("@AccessCode").Value = reader("AccessCode")
+                                'sqlCmd.Parameters("@AccessCode").Value = reader("AccessCode")
                                 sqlCmd.Parameters("@EmployeeCode").Value = reader("Employee_Code")
                                 sqlCmd.Parameters("@_Date").Value = CDate(reader("_Date"))
                                 sqlCmd.Parameters("@TimeIn").Value = If(IsDBNull(reader("Time_In")), DBNull.Value, reader("Time_In"))
@@ -57,6 +60,9 @@ Module DEV_Query
                                 sqlCmd.Parameters("@CostCenter").Value = reader("Cost_Center")
                                 sqlCmd.Parameters("@ManpowerCategory").Value = reader("Manpower_Category")
                                 sqlCmd.Parameters("@Department").Value = reader("Department")
+                                sqlCmd.Parameters("@ManH").Value = reader("ManHours")
+                                sqlCmd.Parameters("@BasicH").Value = reader("BasicHours")
+                                sqlCmd.Parameters("@OtH").Value = reader("OT_Hours")
 
                                 ' Execute Insert for Each Row
                                 sqlCmd.ExecuteNonQuery()
@@ -77,7 +83,6 @@ Module DEV_Query
         End Try
     End Sub
 
-
     Sub TransferDataToMasterList_Nightshift()
         Try
             ' Open MS Access Connection
@@ -87,17 +92,17 @@ Module DEV_Query
             Dev_ConOpen()
 
             ' Step 1: Retrieve data from DayShift_tb in MS Access
-            Dim selectQuery As String = "SELECT AccessCode, Employee_Code, [_Date], Time_In, Time_Out, ShiftType, Cost_Center, Manpower_Category, Department FROM NightShift_tb"
+            Dim selectQuery As String = "SELECT Employee_Code, [_Date], Time_In, Time_Out, ShiftType, Cost_Center, Manpower_Category, Department, ManHours, BasicHours, OT_Hours FROM NightShift_tb"
             Using accessCmd As New OleDbCommand(selectQuery, ACCDbconnection)
                 Using reader As OleDbDataReader = accessCmd.ExecuteReader()
                     If reader.HasRows Then
                         ' Step 2: Prepare SQL Server Insert Query
-                        Dim insertQuery As String = "INSERT INTO ProdMon_MasterList_tb (AccessCode, Employee_Code, [_Date], Time_In, Time_Out, ShiftType, Cost_Center, Manpower_Category, Department) " &
-                                                "VALUES (@AccessCode, @EmployeeCode, @_Date, @TimeIn, @TimeOut, @ShiftType, @CostCenter, @ManpowerCategory, @Department)"
+                        Dim insertQuery As String = "INSERT INTO ProdMon_MasterList_tb (Employee_Code, [_Date], Time_In, Time_Out, ShiftType, Cost_Center, Manpower_Category, Department, ManHours, BasicHours, OT_Hours) " &
+                                                "VALUES (@EmployeeCode, @_Date, @TimeIn, @TimeOut, @ShiftType, @CostCenter, @ManpowerCategory, @Department, @ManH, @BasicH, @OtH)"
 
                         Using sqlCmd As New SqlCommand(insertQuery, Dev_Dbconnection)
                             ' Add parameters for SQL Server
-                            sqlCmd.Parameters.Add("@AccessCode", SqlDbType.VarChar)
+                            'sqlCmd.Parameters.Add("@AccessCode", SqlDbType.VarChar)
                             sqlCmd.Parameters.Add("@EmployeeCode", SqlDbType.VarChar)
                             sqlCmd.Parameters.Add("@_Date", SqlDbType.Date)
                             sqlCmd.Parameters.Add("@TimeIn", SqlDbType.DateTime)
@@ -106,10 +111,13 @@ Module DEV_Query
                             sqlCmd.Parameters.Add("@CostCenter", SqlDbType.VarChar)
                             sqlCmd.Parameters.Add("@ManpowerCategory", SqlDbType.VarChar)
                             sqlCmd.Parameters.Add("@Department", SqlDbType.VarChar)
+                            sqlCmd.Parameters.Add("@ManH", SqlDbType.Int)
+                            sqlCmd.Parameters.Add("@BasicH", SqlDbType.Int)
+                            sqlCmd.Parameters.Add("@OtH", SqlDbType.Int)
 
                             ' Step 3: Process Each Record
                             While reader.Read()
-                                sqlCmd.Parameters("@AccessCode").Value = reader("AccessCode")
+                                'sqlCmd.Parameters("@AccessCode").Value = reader("AccessCode")
                                 sqlCmd.Parameters("@EmployeeCode").Value = reader("Employee_Code")
                                 sqlCmd.Parameters("@_Date").Value = CDate(reader("_Date"))
                                 sqlCmd.Parameters("@TimeIn").Value = If(IsDBNull(reader("Time_In")), DBNull.Value, reader("Time_In"))
@@ -118,6 +126,9 @@ Module DEV_Query
                                 sqlCmd.Parameters("@CostCenter").Value = reader("Cost_Center")
                                 sqlCmd.Parameters("@ManpowerCategory").Value = reader("Manpower_Category")
                                 sqlCmd.Parameters("@Department").Value = reader("Department")
+                                sqlCmd.Parameters("@ManH").Value = reader("ManHours")
+                                sqlCmd.Parameters("@BasicH").Value = reader("BasicHours")
+                                sqlCmd.Parameters("@OtH").Value = reader("OT_Hours")
 
                                 ' Execute Insert for Each Row
                                 sqlCmd.ExecuteNonQuery()
@@ -191,14 +202,26 @@ Module DEV_Query
                 Night_Get_EmployeeDetails()
                 Update_Date_Night()
 
+                UpdateManHours_Day() ' Man Hours computation
+                UpdateManHours_Night() ' Man Hours computation
+
                 TransferDataToMasterList_Dayshift()
                 DeleteRecords_Day()
 
                 TransferDataToMasterList_Nightshift()
                 DeleteRecords_Night()
 
-                MsgBox("Done getting the data of time in and time out for " & TimeIn_Date & "!")
-                Form1.Close()
+                MsgBox("Done getting the data of time in and time out for " & DateForEmail & "!")
+                'Form1.Close()
+
+                GetDepartmentsWithNullTimes(TimeIn_Date)
+
+                If departments.Count > 0 Then
+                    'Console.WriteLine("Departments with missing Time_In/Time_Out: " & vbCrLf & "- " & String.Join(vbCrLf & "- ", departments))
+                    Send_Email()
+                Else
+                    Console.WriteLine("No missing entries found for " & DateForEmail)
+                End If
 
             End If
         Catch ex As Exception
@@ -261,13 +284,25 @@ Module DEV_Query
                 Night_Get_EmployeeDetails()
                 Update_Date_Night()
 
+                UpdateManHours_Day() ' Man Hours computation
+                UpdateManHours_Night() ' Man Hours computation
+
                 TransferDataToMasterList_Dayshift()
                 DeleteRecords_Day()
 
                 TransferDataToMasterList_Nightshift()
                 DeleteRecords_Night()
 
-                Console.WriteLine("Done getting the data of time in and time out for " & TimeIn_Date & "!")
+                Console.WriteLine("Done getting the data of time in and time out for " & DateForEmail & "!")
+
+                GetDepartmentsWithNullTimes(TimeIn_Date)
+
+                If departments.Count > 0 Then
+                    'Console.WriteLine("Departments with missing Time_In/Time_Out: " & vbCrLf & "- " & String.Join(vbCrLf & "- ", departments))
+                    Send_Email()
+                Else
+                    Console.WriteLine("No missing entries found for " & DateForEmail)
+                End If
 
             End If
         Catch ex As Exception
@@ -277,5 +312,36 @@ Module DEV_Query
             Dev_ConClose()
         End Try
     End Sub
+
+
+    '============================< Send Email >=================================
+
+    Public departments As New List(Of String)()
+
+    ' Function to Get Departments with Null/Blank Time_In or Time_Out based on Date
+    Public Function GetDepartmentsWithNullTimes(ByVal TimeIn_Date As Date) As List(Of String)
+        Dim query As String = "SELECT DISTINCT Department FROM ProdMon_MasterList_tb " &
+                              "WHERE (_Date = @Date) AND (Time_In IS NULL OR Time_In = '' OR Time_Out IS NULL OR Time_Out = '')"
+
+        Try
+            Dev_ConOpen()
+            Using cmd As New SqlCommand(query, Dev_Dbconnection)
+                cmd.Parameters.AddWithValue("@Date", TimeIn_Date.ToString("yyyy/MM/dd"))
+
+                Using reader As SqlDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        departments.Add(reader("Department").ToString())
+                    End While
+                End Using
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error: " & ex.Message)
+        Finally
+            Dev_ConClose()
+        End Try
+
+        Return departments
+
+    End Function
 
 End Module

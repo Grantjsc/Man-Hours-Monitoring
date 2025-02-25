@@ -1,4 +1,7 @@
-﻿Module Function_Module
+﻿Imports System.Configuration
+Imports System.Net.Mail
+
+Module Function_Module
 
     Public Year As String = Date.Now.ToString("yyyy")
     Public Month As String = Date.Now.ToString("MMMM")
@@ -24,6 +27,16 @@
         With Auto_Form
             .TopLevel = False
             MainForm.MasterPanel.Controls.Add(Auto_Form)
+            .WindowState = FormWindowState.Maximized
+            .BringToFront()
+            .Show()
+        End With
+    End Sub
+
+    Sub LoadEmailsForm()
+        With Emails_Form
+            .TopLevel = False
+            MainForm.MasterPanel.Controls.Add(Emails_Form)
             .WindowState = FormWindowState.Maximized
             .BringToFront()
             .Show()
@@ -138,5 +151,77 @@
         ElseIf result = DialogResult.Cancel Then
             Exit Sub
         End If
+    End Sub
+End Module
+
+Module AppConfig_Module
+
+    Public config As Configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
+
+    Public Supervisors_Emails As String
+    Public New_Emails As String
+    '=======================< Get Supervisors Email >=======================
+    Sub Get_SupervisorsEmail()
+        Dim value As String = System.Configuration.ConfigurationManager.AppSettings("SP_Emails")
+        Console.WriteLine("SP Emails: " & value)
+
+        Supervisors_Emails = value
+    End Sub
+
+    '=======================< Update Supervisors Email >=======================
+    Sub Update_Supervisors_Email()
+        config.AppSettings.Settings("SP_Emails").Value = New_Emails
+        config.Save(ConfigurationSaveMode.Modified)
+
+        ConfigurationManager.RefreshSection("appSettings")
+    End Sub
+End Module
+
+Module Send_Email_Module
+    Public Email As MailMessage
+
+    Sub Send_Email()
+
+        Get_SupervisorsEmail()
+
+        Dim news_Mes As String
+        news_Mes = "Here's the list of departments that have a missing time in/time out on <b>" & DateForEmail & "</b>:"
+        Dim Department_List As String = "- " & String.Join("<br>" & "- ", departments)
+
+        Dim Body_Mes As String = news_Mes & "<br>" & "<br>" & Department_List
+
+        Try
+            'Dim EmailAdd As String = "gcatapang@littelfuse.com; bmadlangbayan@littelfuse.com; jburog@littelfuse.com; mroxas2@littelfuse.com"
+            Dim Recipients As String() = Supervisors_Emails.Split(";"c)
+            Dim SMTP As New SmtpClient
+
+            Email = New MailMessage
+
+            For Each Reciever As String In Recipients
+                Email.To.Add(New MailAddress(Reciever.ToString()))
+            Next
+
+
+            Email.From = New MailAddress("ProductivityMonitoring@littelfuse.com")
+            Email.Subject = "Departments with Missing Time In/Time Out"
+            Email.Body = "<div style='font-family: Arial, sans-serif; font-size: 12pt;'>Good day,<br><br>" &
+                                     Body_Mes &
+                                    "<br></div>
+                          <br> <small style='color:Gray;'><i> This is a system generated mail. Please do not reply.</i></small>"
+            Email.IsBodyHtml = True
+            ' Set high importance
+            Email.Priority = MailPriority.High
+
+            'AddHandler SMTP.SendCompleted, AddressOf SendCompletedCallback
+
+            SMTP.Host = "mailrelay.america.littelfuse.com"
+            SMTP.SendAsync(Email, Nothing)
+
+            'departments.Clear()
+
+        Catch ex As Exception
+
+            Console.WriteLine("An error occurred: " & ex.Message)
+        End Try
     End Sub
 End Module

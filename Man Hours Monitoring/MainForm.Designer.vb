@@ -33,6 +33,7 @@ Partial Class MainForm
         Me.lblfooter1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Guna2ContextMenuStrip1 = New Guna.UI2.WinForms.Guna2ContextMenuStrip()
+        Me.UpdateEmailsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Guna2CustomGradientPanel1 = New Guna.UI2.WinForms.Guna2CustomGradientPanel()
         Me.MasterPanel = New Guna.UI2.WinForms.Guna2CustomGradientPanel()
         Me.TimerCloseProg = New System.Windows.Forms.Timer(Me.components)
@@ -86,7 +87,7 @@ Partial Class MainForm
         Me.Label2.BackColor = System.Drawing.Color.Transparent
         Me.Label2.Font = New System.Drawing.Font("Impact", 26.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.White
-        Me.Label2.Location = New System.Drawing.Point(219, 10)
+        Me.Label2.Location = New System.Drawing.Point(207, 10)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(384, 43)
         Me.Label2.TabIndex = 4
@@ -133,7 +134,7 @@ Partial Class MainForm
         '
         'Guna2ContextMenuStrip1
         '
-        Me.Guna2ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem})
+        Me.Guna2ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem, Me.UpdateEmailsToolStripMenuItem})
         Me.Guna2ContextMenuStrip1.Name = "Guna2ContextMenuStrip1"
         Me.Guna2ContextMenuStrip1.RenderStyle.ArrowColor = System.Drawing.Color.FromArgb(CType(CType(151, Byte), Integer), CType(CType(143, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.Guna2ContextMenuStrip1.RenderStyle.BorderColor = System.Drawing.Color.Gainsboro
@@ -144,7 +145,13 @@ Partial Class MainForm
         Me.Guna2ContextMenuStrip1.RenderStyle.SelectionForeColor = System.Drawing.Color.White
         Me.Guna2ContextMenuStrip1.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro
         Me.Guna2ContextMenuStrip1.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.Guna2ContextMenuStrip1.Size = New System.Drawing.Size(153, 26)
+        Me.Guna2ContextMenuStrip1.Size = New System.Drawing.Size(153, 48)
+        '
+        'UpdateEmailsToolStripMenuItem
+        '
+        Me.UpdateEmailsToolStripMenuItem.Name = "UpdateEmailsToolStripMenuItem"
+        Me.UpdateEmailsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.UpdateEmailsToolStripMenuItem.Text = "Update emails"
         '
         'Guna2CustomGradientPanel1
         '
@@ -217,4 +224,5 @@ Partial Class MainForm
     Friend WithEvents MasterPanel As Guna.UI2.WinForms.Guna2CustomGradientPanel
     Friend WithEvents TimerCloseProg As Timer
     Friend WithEvents NotifyIcon As NotifyIcon
+    Friend WithEvents UpdateEmailsToolStripMenuItem As ToolStripMenuItem
 End Class

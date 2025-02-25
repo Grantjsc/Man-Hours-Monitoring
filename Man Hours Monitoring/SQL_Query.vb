@@ -27,6 +27,7 @@ Module Query_Module
             accessControlList.Clear()
             timeRecordList.Clear()
             recordTypeList.Clear()
+            departments.Clear()
 
             ' SQL Query to get all records for the selected date
             Dim query As String = "SELECT AccessCode, DateTime, Type FROM tblDownloadData " &

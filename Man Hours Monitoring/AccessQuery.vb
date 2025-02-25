@@ -67,6 +67,7 @@ Module AccessQuery_Module
 
 
     Public TimeIn_Date As String
+    Public DateForEmail As String
 
     Sub Day_Update_TimeIn()
         ACC_ConOpen()
@@ -81,6 +82,7 @@ Module AccessQuery_Module
 
             ' Extract and format the date as MM/dd/yyyy
             TimeIn_Date = latestDateTime.ToString("MM/dd/yyyy")
+            DateForEmail = latestDateTime.ToString("MMMM dd, yyyy")
 
             ' Check if the time falls within 4:00 AM to 2:00 PM
             If recordType = "I" AndAlso recordTime >= New TimeSpan(4, 0, 0) AndAlso recordTime <= New TimeSpan(14, 0, 0) Then
@@ -183,6 +185,86 @@ Module AccessQuery_Module
 
         ACC_ConClose()
     End Sub
+
+
+    Sub UpdateManHours_Day()
+        Try
+            ACC_ConOpen()
+
+            ' Step 1: Retrieve AccessCode, Time_In, and Time_Out from DayShift_tb
+            Dim query As String = "SELECT AccessCode, Time_In, Time_Out FROM DayShift_tb"
+            Dim cmd As New OleDbCommand(query, ACCDbconnection)
+            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+            Dim updateQuery As String = "UPDATE DayShift_tb SET ManHours = ?, BasicHours = ?, OT_Hours = ? WHERE AccessCode = ?"
+            Dim updateCmd As New OleDbCommand(updateQuery, ACCDbconnection)
+
+            While reader.Read()
+                Dim accessCode As String = reader("AccessCode").ToString()
+
+                ' Check for NULL values in Time_In or Time_Out
+                If IsDBNull(reader("Time_In")) OrElse IsDBNull(reader("Time_Out")) Then
+                    ' If either is NULL, set all values to 0
+                    updateCmd.Parameters.Clear()
+                    updateCmd.Parameters.AddWithValue("?", 0) ' ManHours
+                    updateCmd.Parameters.AddWithValue("?", 0) ' BasicHours
+                    updateCmd.Parameters.AddWithValue("?", 0) ' OT_Hours
+                    updateCmd.Parameters.AddWithValue("?", accessCode)
+
+                    updateCmd.ExecuteNonQuery()
+                    Continue While ' Skip to next record
+                End If
+
+                ' Convert Time_In and Time_Out to DateTime
+                Dim timeIn As DateTime = DateTime.Parse(reader("Time_In").ToString())
+                Dim timeOut As DateTime = DateTime.Parse(reader("Time_Out").ToString())
+
+                ' Step 2: Calculate ManHours
+                Dim totalHours As Double = (timeOut - timeIn).TotalHours
+                Dim manHours As Integer = Math.Floor(totalHours) ' Round to the nearest whole number
+
+                ' Step 3: Calculate BasicHours based on ManHours
+                Dim basicHours As Integer
+                If manHours = 0 Then
+                    basicHours = 0
+                ElseIf manHours < 8 Then
+                    basicHours = manHours
+                Else
+                    basicHours = 8
+                End If
+
+                ' Step 4: Calculate OT_Hours
+                Dim otHours As Integer
+                If manHours = 0 Then
+                    otHours = 0
+                ElseIf (manHours - basicHours) < 0 Then
+                    otHours = 0
+                Else
+                    otHours = manHours - basicHours
+                End If
+
+                ' Step 5: Update ManHours_tb
+                updateCmd.Parameters.Clear()
+                updateCmd.Parameters.AddWithValue("?", manHours)
+                updateCmd.Parameters.AddWithValue("?", basicHours)
+                updateCmd.Parameters.AddWithValue("?", otHours)
+                updateCmd.Parameters.AddWithValue("?", accessCode)
+
+                updateCmd.ExecuteNonQuery()
+            End While
+
+            reader.Close()
+            ACC_ConClose()
+            Console.WriteLine("Day shift ManHours, BasicHours, and OT_Hours updated successfully!")
+
+        Catch ex As Exception
+            MessageBox.Show("Error: " & ex.Message)
+        Finally
+            ACC_ConClose()
+        End Try
+    End Sub
+
+
 
     '******************************************< Night SHIFT QUERY >**********************************
 
@@ -341,6 +423,84 @@ Module AccessQuery_Module
         End Using
 
         ACC_ConClose()
+    End Sub
+
+
+    Sub UpdateManHours_Night()
+        Try
+            ACC_ConOpen()
+
+            ' Step 1: Retrieve AccessCode, Time_In, and Time_Out from DayShift_tb
+            Dim query As String = "SELECT AccessCode, Time_In, Time_Out FROM NightShift_tb"
+            Dim cmd As New OleDbCommand(query, ACCDbconnection)
+            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+            Dim updateQuery As String = "UPDATE NightShift_tb SET ManHours = ?, BasicHours = ?, OT_Hours = ? WHERE AccessCode = ?"
+            Dim updateCmd As New OleDbCommand(updateQuery, ACCDbconnection)
+
+            While reader.Read()
+                Dim accessCode As String = reader("AccessCode").ToString()
+
+                ' Check for NULL values in Time_In or Time_Out
+                If IsDBNull(reader("Time_In")) OrElse IsDBNull(reader("Time_Out")) Then
+                    ' If either is NULL, set all values to 0
+                    updateCmd.Parameters.Clear()
+                    updateCmd.Parameters.AddWithValue("?", 0) ' ManHours
+                    updateCmd.Parameters.AddWithValue("?", 0) ' BasicHours
+                    updateCmd.Parameters.AddWithValue("?", 0) ' OT_Hours
+                    updateCmd.Parameters.AddWithValue("?", accessCode)
+
+                    updateCmd.ExecuteNonQuery()
+                    Continue While ' Skip to next record
+                End If
+
+                ' Convert Time_In and Time_Out to DateTime
+                Dim timeIn As DateTime = DateTime.Parse(reader("Time_In").ToString())
+                Dim timeOut As DateTime = DateTime.Parse(reader("Time_Out").ToString())
+
+                ' Step 2: Calculate ManHours
+                Dim totalHours As Double = (timeOut - timeIn).TotalHours
+                Dim manHours As Integer = Math.Floor(totalHours) ' Round to the nearest whole number
+
+                ' Step 3: Calculate BasicHours based on ManHours
+                Dim basicHours As Integer
+                If manHours = 0 Then
+                    basicHours = 0
+                ElseIf manHours < 8 Then
+                    basicHours = manHours
+                Else
+                    basicHours = 8
+                End If
+
+                ' Step 4: Calculate OT_Hours
+                Dim otHours As Integer
+                If manHours = 0 Then
+                    otHours = 0
+                ElseIf (manHours - basicHours) < 0 Then
+                    otHours = 0
+                Else
+                    otHours = manHours - basicHours
+                End If
+
+                ' Step 5: Update ManHours_tb
+                updateCmd.Parameters.Clear()
+                updateCmd.Parameters.AddWithValue("?", manHours)
+                updateCmd.Parameters.AddWithValue("?", basicHours)
+                updateCmd.Parameters.AddWithValue("?", otHours)
+                updateCmd.Parameters.AddWithValue("?", accessCode)
+
+                updateCmd.ExecuteNonQuery()
+            End While
+
+            reader.Close()
+            ACC_ConClose()
+            Console.WriteLine("Night Shift ManHours, BasicHours, and OT_Hours updated successfully!")
+
+        Catch ex As Exception
+            MessageBox.Show("Error: " & ex.Message)
+        Finally
+            ACC_ConClose()
+        End Try
     End Sub
 
 End Module

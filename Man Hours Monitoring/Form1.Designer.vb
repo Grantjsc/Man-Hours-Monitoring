@@ -38,6 +38,10 @@ Partial Class Form1
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Guna2CustomGradientPanel2 = New Guna.UI2.WinForms.Guna2CustomGradientPanel()
         Me.Guna2GroupBox1 = New Guna.UI2.WinForms.Guna2GroupBox()
+        Me.Guna2Button1 = New Guna.UI2.WinForms.Guna2Button()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.btnTransfer = New Guna.UI2.WinForms.Guna2Button()
         Me.btnClose = New Guna.UI2.WinForms.Guna2Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -45,9 +49,8 @@ Partial Class Form1
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TimerForBtn = New System.Windows.Forms.Timer(Me.components)
-        Me.btnTransfer = New Guna.UI2.WinForms.Guna2Button()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Guna2BorderlessForm1 = New Guna.UI2.WinForms.Guna2BorderlessForm(Me.components)
+        Me.Guna2Button2 = New Guna.UI2.WinForms.Guna2Button()
         Me.GroupBox1.SuspendLayout()
         Me.Guna2CustomGradientPanel2.SuspendLayout()
         Me.Guna2GroupBox1.SuspendLayout()
@@ -208,6 +211,8 @@ Partial Class Form1
         Me.Guna2GroupBox1.BorderColor = System.Drawing.Color.Black
         Me.Guna2GroupBox1.BorderRadius = 15
         Me.Guna2GroupBox1.BorderThickness = 5
+        Me.Guna2GroupBox1.Controls.Add(Me.Guna2Button2)
+        Me.Guna2GroupBox1.Controls.Add(Me.Guna2Button1)
         Me.Guna2GroupBox1.Controls.Add(Me.PictureBox1)
         Me.Guna2GroupBox1.Controls.Add(Me.Label8)
         Me.Guna2GroupBox1.Controls.Add(Me.btnTransfer)
@@ -229,6 +234,80 @@ Partial Class Form1
         Me.Guna2GroupBox1.ShadowDecoration.BorderRadius = 15
         Me.Guna2GroupBox1.Size = New System.Drawing.Size(639, 317)
         Me.Guna2GroupBox1.TabIndex = 171
+        '
+        'Guna2Button1
+        '
+        Me.Guna2Button1.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2Button1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.Guna2Button1.BorderRadius = 15
+        Me.Guna2Button1.BorderThickness = 3
+        Me.Guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.Guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.Guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.Guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.Guna2Button1.FillColor = System.Drawing.Color.White
+        Me.Guna2Button1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2Button1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.Guna2Button1.HoverState.FillColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.Guna2Button1.HoverState.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2Button1.HoverState.ForeColor = System.Drawing.Color.White
+        Me.Guna2Button1.Location = New System.Drawing.Point(478, 21)
+        Me.Guna2Button1.Name = "Guna2Button1"
+        Me.Guna2Button1.ShadowDecoration.BorderRadius = 15
+        Me.Guna2Button1.ShadowDecoration.Color = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.Guna2Button1.ShadowDecoration.Enabled = True
+        Me.Guna2Button1.Size = New System.Drawing.Size(93, 44)
+        Me.Guna2Button1.TabIndex = 177
+        Me.Guna2Button1.Text = "sample get"
+        Me.Guna2Button1.Visible = False
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(592, 21)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(20, 20)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 176
+        Me.PictureBox1.TabStop = False
+        Me.PictureBox1.Visible = False
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.ForeColor = System.Drawing.Color.Black
+        Me.Label8.Location = New System.Drawing.Point(63, 15)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(234, 26)
+        Me.Label8.TabIndex = 175
+        Me.Label8.Text = "NOTE:  Manual data collection is only available " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "            from 11:40 AM to 12" &
+    ":00 NN."
+        '
+        'btnTransfer
+        '
+        Me.btnTransfer.BackColor = System.Drawing.Color.Transparent
+        Me.btnTransfer.BorderColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.btnTransfer.BorderRadius = 15
+        Me.btnTransfer.BorderThickness = 3
+        Me.btnTransfer.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.btnTransfer.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.btnTransfer.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.btnTransfer.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.btnTransfer.FillColor = System.Drawing.Color.White
+        Me.btnTransfer.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnTransfer.ForeColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.btnTransfer.HoverState.FillColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.btnTransfer.HoverState.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnTransfer.HoverState.ForeColor = System.Drawing.Color.White
+        Me.btnTransfer.Location = New System.Drawing.Point(232, 207)
+        Me.btnTransfer.Name = "btnTransfer"
+        Me.btnTransfer.ShadowDecoration.BorderRadius = 15
+        Me.btnTransfer.ShadowDecoration.Color = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.btnTransfer.ShadowDecoration.Enabled = True
+        Me.btnTransfer.Size = New System.Drawing.Size(155, 61)
+        Me.btnTransfer.TabIndex = 174
+        Me.btnTransfer.Text = "Manually get the time in and out."
         '
         'btnClose
         '
@@ -315,52 +394,37 @@ Partial Class Form1
         '
         Me.TimerForBtn.Interval = 1000
         '
-        'btnTransfer
+        'Guna2BorderlessForm1
         '
-        Me.btnTransfer.BorderColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.btnTransfer.BorderRadius = 15
-        Me.btnTransfer.BorderThickness = 3
-        Me.btnTransfer.DisabledState.BorderColor = System.Drawing.Color.DarkGray
-        Me.btnTransfer.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
-        Me.btnTransfer.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.btnTransfer.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.btnTransfer.FillColor = System.Drawing.Color.White
-        Me.btnTransfer.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnTransfer.ForeColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.btnTransfer.HoverState.FillColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.btnTransfer.HoverState.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnTransfer.HoverState.ForeColor = System.Drawing.Color.White
-        Me.btnTransfer.Location = New System.Drawing.Point(232, 207)
-        Me.btnTransfer.Name = "btnTransfer"
-        Me.btnTransfer.ShadowDecoration.BorderRadius = 15
-        Me.btnTransfer.ShadowDecoration.Color = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.btnTransfer.ShadowDecoration.Enabled = True
-        Me.btnTransfer.Size = New System.Drawing.Size(155, 61)
-        Me.btnTransfer.TabIndex = 174
-        Me.btnTransfer.Text = "Manually get the time in and out."
+        Me.Guna2BorderlessForm1.ContainerControl = Me
+        Me.Guna2BorderlessForm1.DockIndicatorTransparencyValue = 0.6R
+        Me.Guna2BorderlessForm1.TransparentWhileDrag = True
         '
-        'PictureBox1
+        'Guna2Button2
         '
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(592, 21)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(20, 20)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 176
-        Me.PictureBox1.TabStop = False
-        Me.PictureBox1.Visible = False
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.ForeColor = System.Drawing.Color.Black
-        Me.Label8.Location = New System.Drawing.Point(63, 15)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(234, 26)
-        Me.Label8.TabIndex = 175
-        Me.Label8.Text = "NOTE:  Manual data collection is only available " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "            from 11:40 AM to 12" &
-    ":00 NN."
+        Me.Guna2Button2.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2Button2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.Guna2Button2.BorderRadius = 15
+        Me.Guna2Button2.BorderThickness = 3
+        Me.Guna2Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.Guna2Button2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.Guna2Button2.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.Guna2Button2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.Guna2Button2.FillColor = System.Drawing.Color.White
+        Me.Guna2Button2.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2Button2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.Guna2Button2.HoverState.FillColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.Guna2Button2.HoverState.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2Button2.HoverState.ForeColor = System.Drawing.Color.White
+        Me.Guna2Button2.Location = New System.Drawing.Point(478, 207)
+        Me.Guna2Button2.Name = "Guna2Button2"
+        Me.Guna2Button2.ShadowDecoration.BorderRadius = 15
+        Me.Guna2Button2.ShadowDecoration.Color = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.Guna2Button2.ShadowDecoration.Enabled = True
+        Me.Guna2Button2.Size = New System.Drawing.Size(93, 44)
+        Me.Guna2Button2.TabIndex = 178
+        Me.Guna2Button2.Text = "Man Hours"
+        Me.Guna2Button2.Visible = False
         '
         'Form1
         '
@@ -404,4 +468,7 @@ Partial Class Form1
     Friend WithEvents btnTransfer As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label8 As Label
+    Friend WithEvents Guna2Button1 As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents Guna2Button2 As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents Guna2BorderlessForm1 As Guna.UI2.WinForms.Guna2BorderlessForm
 End Class

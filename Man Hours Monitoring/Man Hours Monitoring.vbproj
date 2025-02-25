@@ -27,7 +27,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>Man Hours Monitoring</ProductName>
     <PublisherName>Littelfuse Philippines %28TSG%29 - GCatapang</PublisherName>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -86,6 +86,7 @@
       <HintPath>..\packages\Guna.UI2.WinForms.2.0.4.7\lib\net472\Guna.UI2.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Design" />
@@ -125,6 +126,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DLMasterlistDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Emails_Form.Designer.vb">
+      <DependentUpon>Emails_Form.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Emails_Form.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
@@ -167,6 +174,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Auto_Form.resx">
       <DependentUpon>Auto_Form.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Emails_Form.resx">
+      <DependentUpon>Emails_Form.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>

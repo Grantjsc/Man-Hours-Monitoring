@@ -23,4 +23,8 @@
     Private Sub SettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem.Click
         LoadManual()
     End Sub
+
+    Private Sub UpdateEmailsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UpdateEmailsToolStripMenuItem.Click
+        LoadEmailsForm()
+    End Sub
 End Class

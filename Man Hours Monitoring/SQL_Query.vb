@@ -27,7 +27,6 @@ Module Query_Module
             accessControlList.Clear()
             timeRecordList.Clear()
             recordTypeList.Clear()
-            departments.Clear()
 
             ' SQL Query to get all records for the selected date
             Dim query As String = "SELECT AccessCode, DateTime, Type FROM tblDownloadData " &
@@ -41,24 +40,26 @@ Module Query_Module
 
                 ' Read data
                 Using reader As SqlDataReader = command.ExecuteReader()
-                    While reader.Read()
-                        Dim accessCode As String = reader("AccessCode").ToString()
-                        Dim latestDateTime As String = reader("DateTime").ToString()
-                        Dim recordType As String = reader("Type").ToString()
+                    If Not reader.HasRows Then
+                        MsgBox("No data for this date or it has been deleted.", MsgBoxStyle.Information)
+                    Else
+                        While reader.Read()
+                            Dim accessCode As String = reader("AccessCode").ToString()
+                            Dim latestDateTime As String = reader("DateTime").ToString()
+                            Dim recordType As String = reader("Type").ToString()
 
-                        accessControlList.Add(accessCode)
-                        timeRecordList.Add(latestDateTime)
-                        recordTypeList.Add(recordType)
+                            accessControlList.Add(accessCode)
+                            timeRecordList.Add(latestDateTime)
+                            recordTypeList.Add(recordType)
 
-                        ' Print to Console
-                        Console.WriteLine($"AccessCode: {accessCode} | TimeRecord: {latestDateTime} | Type: {recordType}")
-                    End While
+                            ' Print to Console
+                            Console.WriteLine($"AccessCode: {accessCode} | TimeRecord: {latestDateTime} | Type: {recordType}")
+                        End While
+                    End If
                 End Using
             End Using
 
             ConClose()
-
-            'MsgBox("Done!")
 
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)

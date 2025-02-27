@@ -223,6 +223,10 @@ Module AccessQuery_Module
                 Dim totalHours As Double = (timeOut - timeIn).TotalHours
                 Dim manHours As Integer = Math.Floor(totalHours) ' Round to the nearest whole number
 
+                If manHours > 12 Then
+                    manHours = 12
+                End If
+
                 ' Step 3: Calculate BasicHours based on ManHours
                 Dim basicHours As Integer
                 If manHours = 0 Then
@@ -461,6 +465,10 @@ Module AccessQuery_Module
                 ' Step 2: Calculate ManHours
                 Dim totalHours As Double = (timeOut - timeIn).TotalHours
                 Dim manHours As Integer = Math.Floor(totalHours) ' Round to the nearest whole number
+
+                If manHours > 12 Then
+                    manHours = 12
+                End If
 
                 ' Step 3: Calculate BasicHours based on ManHours
                 Dim basicHours As Integer

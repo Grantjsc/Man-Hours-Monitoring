@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Auto_Form
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Auto_Form
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -30,13 +30,13 @@ Partial Class Auto_Form
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Guna2GroupBox1 = New Guna.UI2.WinForms.Guna2GroupBox()
+        Me.lblDay = New System.Windows.Forms.Label()
+        Me.lblDate = New System.Windows.Forms.Label()
+        Me.lblHrs = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Guna2CustomGradientPanel2 = New Guna.UI2.WinForms.Guna2CustomGradientPanel()
         Me.TimerCheckTime = New System.Windows.Forms.Timer(Me.components)
         Me.TimerDisplay = New System.Windows.Forms.Timer(Me.components)
-        Me.lblDay = New System.Windows.Forms.Label()
-        Me.lblDate = New System.Windows.Forms.Label()
-        Me.lblHrs = New System.Windows.Forms.Label()
         Me.Guna2GroupBox1.SuspendLayout()
         Me.Guna2CustomGradientPanel2.SuspendLayout()
         Me.SuspendLayout()
@@ -150,30 +150,6 @@ Partial Class Auto_Form
         Me.Guna2GroupBox1.Size = New System.Drawing.Size(639, 317)
         Me.Guna2GroupBox1.TabIndex = 171
         '
-        'Timer1
-        '
-        Me.Timer1.Interval = 1000
-        '
-        'Guna2CustomGradientPanel2
-        '
-        Me.Guna2CustomGradientPanel2.Controls.Add(Me.Guna2GroupBox1)
-        Me.Guna2CustomGradientPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Guna2CustomGradientPanel2.FillColor = System.Drawing.Color.FromArgb(CType(CType(126, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(157, Byte), Integer))
-        Me.Guna2CustomGradientPanel2.FillColor2 = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.Guna2CustomGradientPanel2.FillColor3 = System.Drawing.Color.FromArgb(CType(CType(126, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(157, Byte), Integer))
-        Me.Guna2CustomGradientPanel2.FillColor4 = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.Guna2CustomGradientPanel2.Location = New System.Drawing.Point(0, 0)
-        Me.Guna2CustomGradientPanel2.Name = "Guna2CustomGradientPanel2"
-        Me.Guna2CustomGradientPanel2.Size = New System.Drawing.Size(693, 352)
-        Me.Guna2CustomGradientPanel2.TabIndex = 173
-        '
-        'TimerCheckTime
-        '
-        Me.TimerCheckTime.Interval = 1000
-        '
-        'TimerDisplay
-        '
-        '
         'lblDay
         '
         Me.lblDay.Anchor = System.Windows.Forms.AnchorStyles.Top
@@ -212,6 +188,30 @@ Partial Class Auto_Form
         Me.lblHrs.TabIndex = 170
         Me.lblHrs.Text = "00:00:00 tt"
         Me.lblHrs.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Timer1
+        '
+        Me.Timer1.Interval = 1000
+        '
+        'Guna2CustomGradientPanel2
+        '
+        Me.Guna2CustomGradientPanel2.Controls.Add(Me.Guna2GroupBox1)
+        Me.Guna2CustomGradientPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Guna2CustomGradientPanel2.FillColor = System.Drawing.Color.FromArgb(CType(CType(126, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(157, Byte), Integer))
+        Me.Guna2CustomGradientPanel2.FillColor2 = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.Guna2CustomGradientPanel2.FillColor3 = System.Drawing.Color.FromArgb(CType(CType(126, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(157, Byte), Integer))
+        Me.Guna2CustomGradientPanel2.FillColor4 = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.Guna2CustomGradientPanel2.Location = New System.Drawing.Point(0, 0)
+        Me.Guna2CustomGradientPanel2.Name = "Guna2CustomGradientPanel2"
+        Me.Guna2CustomGradientPanel2.Size = New System.Drawing.Size(693, 352)
+        Me.Guna2CustomGradientPanel2.TabIndex = 173
+        '
+        'TimerCheckTime
+        '
+        Me.TimerCheckTime.Interval = 1000
+        '
+        'TimerDisplay
+        '
         '
         'Auto_Form
         '

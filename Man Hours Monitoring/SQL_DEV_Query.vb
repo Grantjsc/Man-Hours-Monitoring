@@ -1,5 +1,6 @@
 ﻿Imports System.Data.OleDb
 Imports System.Data.SqlClient
+Imports System.Threading
 
 Module DEV_Query
 
@@ -176,7 +177,16 @@ Module DEV_Query
                 MsgBox("This date has already been recorded in the system!", MsgBoxStyle.Critical)
 
             Else
-                'MsgBox("This date doesn't exist.", MsgBoxStyle.Information)
+
+                'Loading_Form.ShowDialog()
+
+                ''MsgBox("This date doesn't exist.", MsgBoxStyle.Information)
+
+                'Form1.PictureBoxSaving.Visible = True
+                'Form1.lblSaving.Visible = True
+                'Thread.Sleep(3000)
+
+                Form1.btnTransfer.Enabled = False
 
                 Get_DL_Employee() ' Get DL Employee from DLMasterlist Database
 
@@ -222,6 +232,11 @@ Module DEV_Query
                 Else
                     Console.WriteLine("No missing entries found for " & DateForEmail)
                 End If
+
+                'Form1.PictureBoxSaving.Visible = False
+                'Form1.lblSaving.Visible = False
+
+                Form1.btnTransfer.Enabled = True
 
             End If
         Catch ex As Exception
@@ -320,6 +335,9 @@ Module DEV_Query
 
     ' Function to Get Departments with Null/Blank Time_In or Time_Out based on Date
     Public Function GetDepartmentsWithNullTimes(ByVal TimeIn_Date As Date) As List(Of String)
+
+        departments.Clear()
+
         Dim query As String = "SELECT DISTINCT Department FROM ProdMon_MasterList_tb " &
                               "WHERE (_Date = @Date) AND (Time_In IS NULL OR Time_In = '' OR Time_Out IS NULL OR Time_Out = '')"
 

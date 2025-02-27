@@ -217,11 +217,11 @@ Module Send_Email_Module
             SMTP.Host = "mailrelay.america.littelfuse.com"
             SMTP.SendAsync(Email, Nothing)
 
-            'departments.Clear()
-
         Catch ex As Exception
 
             Console.WriteLine("An error occurred: " & ex.Message)
         End Try
+
+        'departments.Clear()
     End Sub
 End Module

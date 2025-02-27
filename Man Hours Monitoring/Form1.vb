@@ -61,7 +61,7 @@
     Private Sub TimerForBtn_Tick(sender As Object, e As EventArgs) Handles TimerForBtn.Tick
         Dim currentTime As DateTime = DateTime.Now
 
-        If (currentTime.TimeOfDay >= New TimeSpan(11, 40, 0) AndAlso currentTime.TimeOfDay < New TimeSpan(12, 0, 0)) Then
+        If (currentTime.TimeOfDay >= New TimeSpan(11, 40, 0) AndAlso currentTime.TimeOfDay < New TimeSpan(20, 0, 0)) Then
             btnTransfer.Enabled = True
         Else
             btnTransfer.Enabled = False

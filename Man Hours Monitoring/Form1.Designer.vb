@@ -38,6 +38,7 @@ Partial Class Form1
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Guna2CustomGradientPanel2 = New Guna.UI2.WinForms.Guna2CustomGradientPanel()
         Me.Guna2GroupBox1 = New Guna.UI2.WinForms.Guna2GroupBox()
+        Me.Guna2Button2 = New Guna.UI2.WinForms.Guna2Button()
         Me.Guna2Button1 = New Guna.UI2.WinForms.Guna2Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -50,11 +51,13 @@ Partial Class Form1
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TimerForBtn = New System.Windows.Forms.Timer(Me.components)
         Me.Guna2BorderlessForm1 = New Guna.UI2.WinForms.Guna2BorderlessForm(Me.components)
-        Me.Guna2Button2 = New Guna.UI2.WinForms.Guna2Button()
+        Me.lblSaving = New System.Windows.Forms.Label()
+        Me.PictureBoxSaving = New System.Windows.Forms.PictureBox()
         Me.GroupBox1.SuspendLayout()
         Me.Guna2CustomGradientPanel2.SuspendLayout()
         Me.Guna2GroupBox1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBoxSaving, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnUpdateDS
@@ -211,6 +214,8 @@ Partial Class Form1
         Me.Guna2GroupBox1.BorderColor = System.Drawing.Color.Black
         Me.Guna2GroupBox1.BorderRadius = 15
         Me.Guna2GroupBox1.BorderThickness = 5
+        Me.Guna2GroupBox1.Controls.Add(Me.lblSaving)
+        Me.Guna2GroupBox1.Controls.Add(Me.PictureBoxSaving)
         Me.Guna2GroupBox1.Controls.Add(Me.Guna2Button2)
         Me.Guna2GroupBox1.Controls.Add(Me.Guna2Button1)
         Me.Guna2GroupBox1.Controls.Add(Me.PictureBox1)
@@ -234,6 +239,32 @@ Partial Class Form1
         Me.Guna2GroupBox1.ShadowDecoration.BorderRadius = 15
         Me.Guna2GroupBox1.Size = New System.Drawing.Size(639, 317)
         Me.Guna2GroupBox1.TabIndex = 171
+        '
+        'Guna2Button2
+        '
+        Me.Guna2Button2.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2Button2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.Guna2Button2.BorderRadius = 15
+        Me.Guna2Button2.BorderThickness = 3
+        Me.Guna2Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.Guna2Button2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.Guna2Button2.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.Guna2Button2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.Guna2Button2.FillColor = System.Drawing.Color.White
+        Me.Guna2Button2.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2Button2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.Guna2Button2.HoverState.FillColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.Guna2Button2.HoverState.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2Button2.HoverState.ForeColor = System.Drawing.Color.White
+        Me.Guna2Button2.Location = New System.Drawing.Point(343, 21)
+        Me.Guna2Button2.Name = "Guna2Button2"
+        Me.Guna2Button2.ShadowDecoration.BorderRadius = 15
+        Me.Guna2Button2.ShadowDecoration.Color = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.Guna2Button2.ShadowDecoration.Enabled = True
+        Me.Guna2Button2.Size = New System.Drawing.Size(93, 44)
+        Me.Guna2Button2.TabIndex = 178
+        Me.Guna2Button2.Text = "Man Hours"
+        Me.Guna2Button2.Visible = False
         '
         'Guna2Button1
         '
@@ -400,31 +431,30 @@ Partial Class Form1
         Me.Guna2BorderlessForm1.DockIndicatorTransparencyValue = 0.6R
         Me.Guna2BorderlessForm1.TransparentWhileDrag = True
         '
-        'Guna2Button2
+        'lblSaving
         '
-        Me.Guna2Button2.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2Button2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.Guna2Button2.BorderRadius = 15
-        Me.Guna2Button2.BorderThickness = 3
-        Me.Guna2Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray
-        Me.Guna2Button2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
-        Me.Guna2Button2.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.Guna2Button2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.Guna2Button2.FillColor = System.Drawing.Color.White
-        Me.Guna2Button2.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2Button2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.Guna2Button2.HoverState.FillColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.Guna2Button2.HoverState.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2Button2.HoverState.ForeColor = System.Drawing.Color.White
-        Me.Guna2Button2.Location = New System.Drawing.Point(478, 207)
-        Me.Guna2Button2.Name = "Guna2Button2"
-        Me.Guna2Button2.ShadowDecoration.BorderRadius = 15
-        Me.Guna2Button2.ShadowDecoration.Color = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.Guna2Button2.ShadowDecoration.Enabled = True
-        Me.Guna2Button2.Size = New System.Drawing.Size(93, 44)
-        Me.Guna2Button2.TabIndex = 178
-        Me.Guna2Button2.Text = "Man Hours"
-        Me.Guna2Button2.Visible = False
+        Me.lblSaving.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.lblSaving.AutoSize = True
+        Me.lblSaving.Font = New System.Drawing.Font("Segoe UI", 9.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSaving.Location = New System.Drawing.Point(554, 275)
+        Me.lblSaving.Name = "lblSaving"
+        Me.lblSaving.Size = New System.Drawing.Size(66, 17)
+        Me.lblSaving.TabIndex = 180
+        Me.lblSaving.Text = "Saving ..."
+        Me.lblSaving.Visible = False
+        '
+        'PictureBoxSaving
+        '
+        Me.PictureBoxSaving.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.PictureBoxSaving.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBoxSaving.Image = CType(resources.GetObject("PictureBoxSaving.Image"), System.Drawing.Image)
+        Me.PictureBoxSaving.Location = New System.Drawing.Point(557, 220)
+        Me.PictureBoxSaving.Name = "PictureBoxSaving"
+        Me.PictureBoxSaving.Size = New System.Drawing.Size(55, 52)
+        Me.PictureBoxSaving.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBoxSaving.TabIndex = 179
+        Me.PictureBoxSaving.TabStop = False
+        Me.PictureBoxSaving.Visible = False
         '
         'Form1
         '
@@ -440,6 +470,7 @@ Partial Class Form1
         Me.Guna2GroupBox1.ResumeLayout(False)
         Me.Guna2GroupBox1.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBoxSaving, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -471,4 +502,6 @@ Partial Class Form1
     Friend WithEvents Guna2Button1 As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents Guna2Button2 As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents Guna2BorderlessForm1 As Guna.UI2.WinForms.Guna2BorderlessForm
+    Friend WithEvents lblSaving As Label
+    Friend WithEvents PictureBoxSaving As PictureBox
 End Class

@@ -59,7 +59,7 @@ Module MAsterListQuery_Module
                 Dim accessCode As String = DL_Employee_List(i) ' Get corresponding AccessCode
 
                 ' SQL Query to fetch employee details
-                Dim query As String = "SELECT Code, Manpower_Category, Cost_Center_Code, Department " &
+                Dim query As String = "SELECT Code, Manpower_Category, Cost_Center_Code, Department, Employee_Name, Immediate_Supervisor, Product_Group, Line_Assignment " &
                                   "FROM AccessCode_tb WHERE Access_Code = ?"
 
                 Using cmd As New OleDbCommand(query, MLDbconnection)
@@ -71,9 +71,13 @@ Module MAsterListQuery_Module
                             Dim manpowerCategory As String = reader("Manpower_Category").ToString()
                             Dim costCenter As String = reader("Cost_Center_Code").ToString()
                             Dim Depart As String = reader("Department").ToString()
+                            Dim Name As String = reader("Employee_Name").ToString()
+                            Dim Supervisor As String = reader("Immediate_Supervisor").ToString()
+                            Dim ProdGroup As String = reader("Product_Group").ToString()
+                            Dim Line As String = reader("Line_Assignment").ToString()
 
                             ' Call Update_AccessCodeTB using AccessCode as reference
-                            Day_Update_AccessCodeTB(accessCode, employeeCode, costCenter, manpowerCategory, Depart)
+                            Day_Update_AccessCodeTB(accessCode, employeeCode, costCenter, manpowerCategory, Depart, Name, Supervisor, ProdGroup, Line)
                         End If
                     End Using
                 End Using
@@ -87,7 +91,7 @@ Module MAsterListQuery_Module
         End Try
     End Sub
 
-    Sub Day_Update_AccessCodeTB(accessCode As String, empCode As String, costCenter As String, manpowerCategory As String, Depart As String)
+    Sub Day_Update_AccessCodeTB(accessCode As String, empCode As String, costCenter As String, manpowerCategory As String, Depart As String, Name As String, Supervisor As String, ProdGroup As String, Line As String)
         Try
             ' Open the ML Database connection
             ACC_ConOpen()
@@ -95,7 +99,9 @@ Module MAsterListQuery_Module
             ' Update query for AccessCode_tb using Access_Code as reference
             Dim updateQuery As String = "UPDATE DayShift_tb SET " &
                                         "Employee_Code = ?, Cost_Center = ?, " &
-                                        "Manpower_Category = ?, Department = ? " &
+                                        "Manpower_Category = ?, Department = ?, " &
+                                        "Employee_Name = ?, Immediate_Supervisor = ?, " &
+                                        "Product_Group = ?, Line_Assignment = ? " &
                                         "WHERE AccessCode = ?"
 
             Using cmd As New OleDbCommand(updateQuery, ACCDbconnection)
@@ -103,7 +109,13 @@ Module MAsterListQuery_Module
                 cmd.Parameters.AddWithValue("?", costCenter)
                 cmd.Parameters.AddWithValue("?", manpowerCategory)
                 cmd.Parameters.AddWithValue("?", Depart)
+
+                cmd.Parameters.AddWithValue("?", Name)
+                cmd.Parameters.AddWithValue("?", Supervisor)
+                cmd.Parameters.AddWithValue("?", ProdGroup)
+                cmd.Parameters.AddWithValue("?", Line)
                 cmd.Parameters.AddWithValue("?", accessCode) ' Reference column
+
 
                 Dim rowsUpdated As Integer = cmd.ExecuteNonQuery()
                 Debug.WriteLine($"Updated {rowsUpdated} row(s) for Access_Code: {accessCode}")
@@ -129,8 +141,8 @@ Module MAsterListQuery_Module
                 Dim accessCode As String = DL_Employee_List(i) ' Get corresponding AccessCode
 
                 ' SQL Query to fetch employee details
-                Dim query As String = "SELECT Code, Manpower_Category, Cost_Center_Code, Department " &
-                                  "FROM AccessCode_tb WHERE Access_Code = ?"
+                Dim query As String = "SELECT Code, Manpower_Category, Cost_Center_Code, Department, Employee_Name, Immediate_Supervisor, Product_Group, Line_Assignment " &
+                   "FROM AccessCode_tb WHERE Access_Code = ?"
 
                 Using cmd As New OleDbCommand(query, MLDbconnection)
                     cmd.Parameters.AddWithValue("?", accessCode)
@@ -141,9 +153,13 @@ Module MAsterListQuery_Module
                             Dim manpowerCategory As String = reader("Manpower_Category").ToString()
                             Dim costCenter As String = reader("Cost_Center_Code").ToString()
                             Dim Depart As String = reader("Department").ToString()
+                            Dim Name As String = reader("Employee_Name").ToString()
+                            Dim Supervisor As String = reader("Immediate_Supervisor").ToString()
+                            Dim ProdGroup As String = reader("Product_Group").ToString()
+                            Dim Line As String = reader("Line_Assignment").ToString()
 
                             ' Call Update_AccessCodeTB using AccessCode as reference
-                            Night_Update_AccessCodeTB(accessCode, employeeCode, costCenter, manpowerCategory, Depart)
+                            Night_Update_AccessCodeTB(accessCode, employeeCode, costCenter, manpowerCategory, Depart, Name, Supervisor, ProdGroup, Line)
                         End If
                     End Using
                 End Using
@@ -157,22 +173,29 @@ Module MAsterListQuery_Module
         End Try
     End Sub
 
-    Sub Night_Update_AccessCodeTB(accessCode As String, empCode As String, costCenter As String, manpowerCategory As String, Depart As String)
+    Sub Night_Update_AccessCodeTB(accessCode As String, empCode As String, costCenter As String, manpowerCategory As String, Depart As String, Name As String, Supervisor As String, ProdGroup As String, Line As String)
         Try
             ' Open the ML Database connection
             ACC_ConOpen()
 
             ' Update query for AccessCode_tb using Access_Code as reference
             Dim updateQuery As String = "UPDATE NightShift_tb SET " &
-                                        "Employee_Code = ?, Cost_Center = ?, " &
-                                        "Manpower_Category = ?, Department = ? " &
-                                        "WHERE AccessCode = ?"
+                             "Employee_Code = ?, Cost_Center = ?, " &
+                             "Manpower_Category = ?, Department = ?, " &
+                             "Employee_Name = ?, Immediate_Supervisor = ?, " &
+                             "Product_Group = ?, Line_Assignment = ? " &
+                             "WHERE AccessCode = ?"
 
             Using cmd As New OleDbCommand(updateQuery, ACCDbconnection)
                 cmd.Parameters.AddWithValue("?", empCode)
                 cmd.Parameters.AddWithValue("?", costCenter)
                 cmd.Parameters.AddWithValue("?", manpowerCategory)
                 cmd.Parameters.AddWithValue("?", Depart)
+
+                cmd.Parameters.AddWithValue("?", Name)
+                cmd.Parameters.AddWithValue("?", Supervisor)
+                cmd.Parameters.AddWithValue("?", ProdGroup)
+                cmd.Parameters.AddWithValue("?", Line)
                 cmd.Parameters.AddWithValue("?", accessCode) ' Reference column
 
                 Dim rowsUpdated As Integer = cmd.ExecuteNonQuery()

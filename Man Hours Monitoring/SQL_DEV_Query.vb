@@ -27,13 +27,13 @@ Module DEV_Query
             Dev_ConOpen()
 
             ' Step 1: Retrieve data from DayShift_tb in MS Access
-            Dim selectQuery As String = "SELECT Employee_Code, [_Date], Time_In, Time_Out, ShiftType, Cost_Center, Manpower_Category, Department, ManHours, BasicHours, OT_Hours FROM DayShift_tb"
+            Dim selectQuery As String = "SELECT Employee_Code, [_Date], Time_In, Time_Out, ShiftType, Cost_Center, Manpower_Category, Department, ManHours, BasicHours, OT_Hours, Employee_Name, Immediate_Supervisor, Line_Assignment, Product_Group FROM DayShift_tb"
             Using accessCmd As New OleDbCommand(selectQuery, ACCDbconnection)
                 Using reader As OleDbDataReader = accessCmd.ExecuteReader()
                     If reader.HasRows Then
                         ' Step 2: Prepare SQL Server Insert Query
-                        Dim insertQuery As String = "INSERT INTO ProdMon_MasterList_tb (Employee_Code, [_Date], Time_In, Time_Out, ShiftType, Cost_Center, Manpower_Category, Department, ManHours, BasicHours, OT_Hours) " &
-                                                "VALUES (@EmployeeCode, @_Date, @TimeIn, @TimeOut, @ShiftType, @CostCenter, @ManpowerCategory, @Department, @ManH, @BasicH, @OtH)"
+                        Dim insertQuery As String = "INSERT INTO ProdMon_MasterList_tb (Employee_Code, [_Date], Time_In, Time_Out, ShiftType, Cost_Center, Manpower_Category, Department, ManHours, BasicHours, OT_Hours, Employee_Name, Immediate_Supervisor, Line_Assignment, Product_Group) " &
+                                                "VALUES (@EmployeeCode, @_Date, @TimeIn, @TimeOut, @ShiftType, @CostCenter, @ManpowerCategory, @Department, @ManH, @BasicH, @OtH, @name, @supervisor, @LineAss, @Pgroup)"
 
                         Using sqlCmd As New SqlCommand(insertQuery, Dev_Dbconnection)
                             ' Add parameters for SQL Server
@@ -49,6 +49,10 @@ Module DEV_Query
                             sqlCmd.Parameters.Add("@ManH", SqlDbType.Int)
                             sqlCmd.Parameters.Add("@BasicH", SqlDbType.Int)
                             sqlCmd.Parameters.Add("@OtH", SqlDbType.Int)
+                            sqlCmd.Parameters.Add("@name", SqlDbType.VarChar)
+                            sqlCmd.Parameters.Add("@supervisor", SqlDbType.VarChar)
+                            sqlCmd.Parameters.Add("@LineAss", SqlDbType.VarChar)
+                            sqlCmd.Parameters.Add("@Pgroup", SqlDbType.VarChar)
 
                             ' Step 3: Process Each Record
                             While reader.Read()
@@ -64,6 +68,10 @@ Module DEV_Query
                                 sqlCmd.Parameters("@ManH").Value = reader("ManHours")
                                 sqlCmd.Parameters("@BasicH").Value = reader("BasicHours")
                                 sqlCmd.Parameters("@OtH").Value = reader("OT_Hours")
+                                sqlCmd.Parameters("@name").Value = reader("Employee_Name")
+                                sqlCmd.Parameters("@supervisor").Value = reader("Immediate_Supervisor")
+                                sqlCmd.Parameters("@LineAss").Value = reader("Line_Assignment")
+                                sqlCmd.Parameters("@Pgroup").Value = reader("Product_Group")
 
                                 ' Execute Insert for Each Row
                                 sqlCmd.ExecuteNonQuery()
@@ -93,13 +101,13 @@ Module DEV_Query
             Dev_ConOpen()
 
             ' Step 1: Retrieve data from DayShift_tb in MS Access
-            Dim selectQuery As String = "SELECT Employee_Code, [_Date], Time_In, Time_Out, ShiftType, Cost_Center, Manpower_Category, Department, ManHours, BasicHours, OT_Hours FROM NightShift_tb"
+            Dim selectQuery As String = "SELECT Employee_Code, [_Date], Time_In, Time_Out, ShiftType, Cost_Center, Manpower_Category, Department, ManHours, BasicHours, OT_Hours, Employee_Name, Immediate_Supervisor, Line_Assignment, Product_Group FROM NightShift_tb"
             Using accessCmd As New OleDbCommand(selectQuery, ACCDbconnection)
                 Using reader As OleDbDataReader = accessCmd.ExecuteReader()
                     If reader.HasRows Then
                         ' Step 2: Prepare SQL Server Insert Query
-                        Dim insertQuery As String = "INSERT INTO ProdMon_MasterList_tb (Employee_Code, [_Date], Time_In, Time_Out, ShiftType, Cost_Center, Manpower_Category, Department, ManHours, BasicHours, OT_Hours) " &
-                                                "VALUES (@EmployeeCode, @_Date, @TimeIn, @TimeOut, @ShiftType, @CostCenter, @ManpowerCategory, @Department, @ManH, @BasicH, @OtH)"
+                        Dim insertQuery As String = "INSERT INTO ProdMon_MasterList_tb (Employee_Code, [_Date], Time_In, Time_Out, ShiftType, Cost_Center, Manpower_Category, Department, ManHours, BasicHours, OT_Hours, Employee_Name, Immediate_Supervisor, Line_Assignment, Product_Group) " &
+                                                "VALUES (@EmployeeCode, @_Date, @TimeIn, @TimeOut, @ShiftType, @CostCenter, @ManpowerCategory, @Department, @ManH, @BasicH, @OtH, @name, @supervisor, @LineAss, @Pgroup)"
 
                         Using sqlCmd As New SqlCommand(insertQuery, Dev_Dbconnection)
                             ' Add parameters for SQL Server
@@ -115,6 +123,10 @@ Module DEV_Query
                             sqlCmd.Parameters.Add("@ManH", SqlDbType.Int)
                             sqlCmd.Parameters.Add("@BasicH", SqlDbType.Int)
                             sqlCmd.Parameters.Add("@OtH", SqlDbType.Int)
+                            sqlCmd.Parameters.Add("@name", SqlDbType.VarChar)
+                            sqlCmd.Parameters.Add("@supervisor", SqlDbType.VarChar)
+                            sqlCmd.Parameters.Add("@LineAss", SqlDbType.VarChar)
+                            sqlCmd.Parameters.Add("@Pgroup", SqlDbType.VarChar)
 
                             ' Step 3: Process Each Record
                             While reader.Read()
@@ -130,6 +142,10 @@ Module DEV_Query
                                 sqlCmd.Parameters("@ManH").Value = reader("ManHours")
                                 sqlCmd.Parameters("@BasicH").Value = reader("BasicHours")
                                 sqlCmd.Parameters("@OtH").Value = reader("OT_Hours")
+                                sqlCmd.Parameters("@name").Value = reader("Employee_Name")
+                                sqlCmd.Parameters("@supervisor").Value = reader("Immediate_Supervisor")
+                                sqlCmd.Parameters("@LineAss").Value = reader("Line_Assignment")
+                                sqlCmd.Parameters("@Pgroup").Value = reader("Product_Group")
 
                                 ' Execute Insert for Each Row
                                 sqlCmd.ExecuteNonQuery()
